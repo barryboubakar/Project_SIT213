@@ -1,0 +1,5 @@
+#!/bin/bash
+hello
+hello "toto"
+hello "toto" "titi"
+hello "toto" "titi" "tata"

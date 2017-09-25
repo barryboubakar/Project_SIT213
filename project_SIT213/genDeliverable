@@ -1,0 +1,7 @@
+#!/bin/bash
+
+nom1=Barry
+nom2=Le_Gall
+
+tar zcvf "$nom1"-"$nom2".tar.gz bin/ src/ docs/ cleanAll  compile  genDoc hello runTests README 
+

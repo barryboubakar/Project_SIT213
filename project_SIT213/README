@@ -1,0 +1,27 @@
+# Avant de commencer toute execution, il faut utiliser le cleanALL pour effacer tous les fichiers qui vont potentiellement generer des erreurs.
+
+cleanAll ou  ./cleanAll
+
+# Pour compiler le code, utiliser la commande suivante: 
+
+compile ou ./compile 
+
+# Pour generer la documentation du code, utiliser la commande suivante:
+
+genDoc ou ./genDoc
+
+# Pour tester le code:
+
+hello  <avec plusieurs parametres ou pas ! >
+
+ou 
+
+./hello <avec plusieurs parametres ou pas ! >
+
+
+# Il est aussi possible de tester cette derniere commande avec plusieurs phrases test deja ecrites:
+
+runTests
+
+
+

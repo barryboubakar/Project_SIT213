@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Compiler tous les fichiers dans src/
+javac src/*.java -d bin/
+
+
+
+# Compiler tous les fichiers dans src/sources/
+#javac src/sources/* -d bin/sources/
+
+# Compiler tous les fichiers dans src/information/
+#javac src/information/* -d bin/information/
+
+# Compiler tous les fichiers dans src/transmetteurs/
+#javac src/transmetteurs/* -d bin/transmetteurs/
+
+# Compiler tous les fichiers dans src/visualisations/
+#javac src/visualisations/* -d bin/visualisations/
+
+# Compiler tous les fichiers dans src/destinations/
+#javac src/destinations/* -d bin/destinations/
+
