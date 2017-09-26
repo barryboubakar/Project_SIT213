@@ -31,9 +31,9 @@ public  abstract class Source <T> implements  SourceInterface <T> {
      * réalisations de la classe abstraite Source
      */
     public Source () {
-	destinationsConnectees = new LinkedList <DestinationInterface <T>> ();
-	informationGeneree = null;
-	informationEmise = null;
+		destinationsConnectees = new LinkedList <DestinationInterface <T>> ();
+		informationGeneree = null;
+		informationEmise = null;
     }
     
     /**
@@ -41,7 +41,7 @@ public  abstract class Source <T> implements  SourceInterface <T> {
      * @return une information   
      */
     public Information <T>  getInformationEmise() {
-	return this.informationEmise;
+    	return this.informationEmise;
     }
    
     /**
@@ -49,7 +49,7 @@ public  abstract class Source <T> implements  SourceInterface <T> {
      * @param destination  la destination à connecter
      */
     public void connecter (DestinationInterface <T> destination) {
-	destinationsConnectees.add(destination); 
+    	destinationsConnectees.add(destination); 
     }
    
     /**
@@ -57,17 +57,17 @@ public  abstract class Source <T> implements  SourceInterface <T> {
      * @param destination  la destination à déconnecter
      */
     public void deconnecter (DestinationInterface <T> destination) {
-	destinationsConnectees.remove(destination); 
+    	destinationsConnectees.remove(destination); 
     }
    
     /**
      * émet l'information générée
      */
-    public   void emettre() throws InformationNonConforme {
-       	// émission vers les composants connectés
-	for (DestinationInterface <T> destinationConnectee : destinationsConnectees) {
-            destinationConnectee.recevoir(informationGeneree);
-	}
-	this.informationEmise = informationGeneree;   			 			      
+    public void emettre() throws InformationNonConforme {
+	    // émission vers les composants connectés
+		for (DestinationInterface <T> destinationConnectee : destinationsConnectees) {
+	            destinationConnectee.recevoir(informationGeneree);
+		}
+		this.informationEmise = informationGeneree;   			 			      
     }
 }
