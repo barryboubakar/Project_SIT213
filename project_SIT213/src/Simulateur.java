@@ -1,26 +1,19 @@
-import sources.*;
-import destinations.*;
-import transmetteurs.*;
-import information.*;
-import visualisations.*;
 
-import java.util.regex.*;
-import java.util.*;
-import java.lang.Math;
-	
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.util.LinkedList;
+
+import sources.*;
+import transmetteurs.*;
+import visualisations.*;
+import destinations.*;
+
+
 
 
 /** La classe Simulateur permet de construire et simuler une chaîne de
  * transmission composée d'une Source, d'un nombre variable de
  * Transmetteur(s) et d'une Destination.
- * @author cousin
- * @author prou
+ * @author A.Barry et Y.Le Gall
  *
  */
 public class Simulateur {
@@ -50,8 +43,8 @@ public class Simulateur {
    	
    
     /** Le constructeur de Simulateur construit une chaîne de
-     * transmission composée d'une Source <Boolean>, d'une Destination
-     * <Boolean> et de Transmetteur(s) [voir la méthode
+     * transmission composée d'une Source Boolean, d'une Destination
+     * Boolean et de Transmetteur(s) [voir la méthode
      * analyseArguments]...  <br> Les différents composants de la
      * chaîne de transmission (Source, Transmetteur(s), Destination,
      * Sonde(s) de visualisation) sont créés et connectés.
@@ -62,28 +55,33 @@ public class Simulateur {
      */   
     public Simulateur(String [] args) throws ArgumentsException {
       
-      	// analyser et récupérer les arguments
+      	// On analyse et recupere les arguments
     	analyseArguments(args);
       
-      	// A compléter
-    	if(messageAleatoire &&  aleatoireAvecGerme){
+      	// On genere une source
+    	if(aleatoireAvecGerme)
     		source = new SourceAleatoire(nbBitsMess,seed);
-    	}
-    	if((messageAleatoire && !aleatoireAvecGerme) || (!messageAleatoire && aleatoireAvecGerme))
-    		 throw new ArgumentsException("Seed ou message incorrecte !");
-    	else {
-    		source = new SourceFixe(messageString);
-    	}
+    	else
+    		source = new SourceAleatoire(nbBitsMess); 
     	
+    	if(!messageAleatoire)
+    		source = new SourceFixe(messageString);  
+    	
+    	//On genere une destination
     	destination = new DestinationFinale();
+    	
+    	//On genere un transmetteur
     	transmetteurLogique = new TransmetteurParfait();
     	
+    	//On interconnecte nos equipements
     	source.connecter(transmetteurLogique);
     	transmetteurLogique.connecter(destination);
-    	    	
+    	 
+    	//On utilise des sondes
     	sondes = new LinkedList();
     	sondes.add(new SondeLogique("Source", 20));
     	sondes.add(new SondeLogique("Transmetteur", 20));
+    	
     }
    
    
@@ -157,10 +155,13 @@ public class Simulateur {
      *
      */ 
     public void execute() throws Exception {      
-    	source.emettre();   
-    	sondes.get(0).recevoir(source.getInformationEmise());
+    	source.emettre();       	
     	transmetteurLogique.emettre();
-    	sondes.get(1).recevoir(transmetteurLogique.getInformationEmise());
+    	
+    	if(affichage) {
+    		sondes.get(0).recevoir(source.getInformationEmise());
+    		sondes.get(1).recevoir(transmetteurLogique.getInformationEmise());
+    	}
     }
    
    	   	
@@ -173,17 +174,17 @@ public class Simulateur {
     public float  calculTauxErreurBinaire() {
       
       	// A compléter
-      	if(sondes.get(0).getInformationRecue().nbElements() != sondes.get(1).getInformationRecue().nbElements())
+      	if(source.getInformationEmise().nbElements() != destination.getInformationRecue().nbElements())
       		return -1;
 
       	int nbErreurs=0;
       	
-      	for(int i=0;i<sondes.get(0).getInformationRecue().nbElements();i++){
-      		if(sondes.get(0).getInformationRecue().iemeElement(i) != sondes.get(1).getInformationRecue().iemeElement(i))
+      	for(int i=0;i<source.getInformationEmise().nbElements();i++){
+      		if(source.getInformationEmise().iemeElement(i) != destination.getInformationRecue().iemeElement(i))
       			nbErreurs++;
       	}
     	
-    	return  nbErreurs/sondes.get(0).getInformationRecue().nbElements();
+    	return  nbErreurs/source.getInformationEmise().nbElements();
     }
    
    

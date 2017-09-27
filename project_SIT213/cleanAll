@@ -1,6 +1,5 @@
 #!/bin/bash
 
-rm -rf bin/*/*.class
-rm -rf bin/*.class 
+rm -rf bin/*
 rm -rf docs/*
 rm -rf *.tar.gz

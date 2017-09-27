@@ -1,6 +1,3 @@
-/**
- * 
- */
 package sources;
 
 
@@ -11,24 +8,37 @@ import information.InformationNonConforme;
 import destinations.DestinationInterface;
 
 /**
- *  Classe proposant une source fixe d'informations dont les
- * éléments sont de type T
- * @authors A.Barry & Y.Le Gall
+ * Classe proposant une source aléatoire d'informations dont les
+ * éléments sont de type Booléen
+ * @author A.Barry et Y.Le Gall
  *
  */
 public class SourceAleatoire extends Source <Boolean> {
 
 	private int nbBits;
 	private int seed;
-
+	private boolean pSeed = false;
+	
 	/**
-	 * constructeur de la classe
+	 * constructeur de la classe avec seed
+	 * @param nbBits correspond au nombre de bits à générer. Valeurs comprise entre 0 et 999 999
+	 * @param seed définit la semance d'initialisation pour l'algorithme de génération aléatoire
 	 */
 	public SourceAleatoire(int nbBits,int seed) {
 		super();
 		this.nbBits = nbBits;
 		this.seed = seed;
+		this.pSeed = true;
 	}
+	/**
+	 * constructeur de la classe sans seed
+	 * @param nbBits correspond au nombre de bits à générer. Valeurs comprise entre 0 et 999 999.
+	 */
+	public SourceAleatoire(int nbBits) {
+		super();
+		this.nbBits = nbBits;
+	}
+	
 
     /**
      * retourne la dernière information émise par la source
@@ -39,12 +49,17 @@ public class SourceAleatoire extends Source <Boolean> {
     }
     
     /**
-     * Emet l'information générée
+     * emet l'information générée
      */
     public void emettre() throws InformationNonConforme {
 	    // On génère la chaine d'information aléatoire
     	Boolean[] infoGen = new Boolean[nbBits];
-    	Random rand = new Random(seed);
+    	Random rand;
+    	if(pSeed == true)
+    		 rand = new Random(seed);
+    	else
+    		rand = new Random();
+    	
     	for(int i=0;i<nbBits;i++){
     		infoGen[i] = rand.nextBoolean();
 		}

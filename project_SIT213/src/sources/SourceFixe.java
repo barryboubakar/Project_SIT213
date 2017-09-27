@@ -1,6 +1,3 @@
-/**
- * 
- */
 package sources;
 
 
@@ -10,14 +7,15 @@ import destinations.DestinationInterface;
 
 /**
  *  Classe proposant une source fixe d'informations dont les
- * éléments sont de type T
- * @authors A.Barry & Y.Le Gall
+ * éléments sont de type Booléen
+ * @author A.Barry et Y.Le Gall
  *
  */
 public class SourceFixe extends Source <Boolean> {
 
 	/**
 	 * constructeur de la classe
+	 * @param chaineBits  suite binaire (fixe) utilisée pour la simulation
 	 */
 	public SourceFixe(String chaineBits) {
 		super();
@@ -33,7 +31,7 @@ public class SourceFixe extends Source <Boolean> {
 	}
 	
     /**
-     * retourne la dernière information émise par la source
+     * Retourne la dernière information émise par la source
      * @return une information   
      */
     public Information <Boolean>  getInformationEmise() {

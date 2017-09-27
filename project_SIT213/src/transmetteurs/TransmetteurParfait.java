@@ -3,9 +3,10 @@ package transmetteurs;
 import destinations.*;
 import information.*;
 
-
 /** 
- * @authors A.Barry & Y.Le Gall
+ * Classe d'un composant transmetteur parfait d'informations dont
+ * les éléments sont de type Booléan en entrée et de type Booléan en sortie;
+ * @author A.Barry et Y.Le Gall
  */
 public class TransmetteurParfait  extends  Transmetteur<Boolean,Boolean> {
    
@@ -17,11 +18,19 @@ public class TransmetteurParfait  extends  Transmetteur<Boolean,Boolean> {
     	super();
     }
 
-	@Override
+	
+	/** 
+     * reçoit l'information venant de la source 
+     * @param information l'information émise par la source connectée
+     */
+    @Override
 	public void recevoir(Information<Boolean> information) throws InformationNonConforme {
 		this.informationRecue = information;		
 	}
 
+    /** 
+     * emet l'information vers la(les) destination(s) connecté(e)s 
+     */
 	@Override
 	public void emettre() throws InformationNonConforme {
 		// Emission vers les composants connectés

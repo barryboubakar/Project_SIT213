@@ -1,5 +1,11 @@
 #!/bin/bash
-hello
-hello "toto"
-hello "toto" "titi"
-hello "toto" "titi" "tata"
+
+cd bin/
+
+java Simulateur
+java Simulateur -mess 10101010
+java Simulateur -mess "10101010"
+java Simulateur -mess 125
+java Simulateur -mess 125 -seed 100 
+ 
+

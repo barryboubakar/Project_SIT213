@@ -3,9 +3,10 @@ package destinations;
 import information.*;
 
 /** 
- * @authors A.Barry & Y.Le Gall
+ * Classe d'un composant destination d'informations dont les
+ * éléments sont de type Booléen
+ * @author A.Barry et Y.Le Gall
  */
-
 public class DestinationFinale extends Destination <Boolean> {
        
     /** 
